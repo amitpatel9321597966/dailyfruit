@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { CartContext } from "./context/CartContext.jsx";
+import { CartContext } from "../context/cartcontext";
 
 
 export default function Cart() {
@@ -32,7 +32,8 @@ export default function Cart() {
       alert("Please enter address and mobile number");
       return;
     }
-    const orderText =               //%A is for in url sending message to whasapp for spacing
+
+    const orderText =
       `🛒 *New Order From DailyFruit*%0A%0A` +
       cart
         .map(
@@ -71,7 +72,7 @@ export default function Cart() {
                 <h2 className="text-xl font-semibold">{item.name}</h2>
                 <p className="text-gray-600">Price: ₹{item.price}/kg</p>
 
-                {/* quantity button */}
+                {/* Quantity Buttons */}
                 <div className="flex items-center gap-3 mt-2">
                   <button onClick={() => decreaseQty(item.id)} className="bg-gray-300 px-3 py-1 rounded">–</button>
                   <span className="text-lg font-semibold">{item.qty}</span>
@@ -96,7 +97,7 @@ export default function Cart() {
             </div>
           ))}
 
-          {/* coupon ection */}
+          {/* Coupon Section */}
           <div className="flex flex-col sm:flex-row items-center gap-3 mt-4">
             <input
               type="text"
@@ -113,7 +114,7 @@ export default function Cart() {
             </button>
           </div>
 
-          {/* total & place order */}
+          {/* Total & Place Order */}
           <div className="text-right mt-6">
             <h2 className="text-2xl font-bold mb-4">SubTotal: ₹{totalPrice.toFixed(2)}</h2>
             <button
@@ -124,7 +125,7 @@ export default function Cart() {
             </button>
           </div>
 
-          {/* order form modal */}
+          {/* Order Form Modal */}
           {showOrderForm && (
             <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
               <div className="bg-white p-6 rounded-lg w-full max-w-md">
