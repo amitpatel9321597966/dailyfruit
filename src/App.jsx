@@ -5,7 +5,7 @@ import Seasonal from "./pages/Seasonal";
 import Allfruit from "./pages/Allfruit";
 import Cart from "./pages/Cart";
 import "./index.css";
-import "./app.css";
+import "./App.css";
 
 export default function App() {
   return (
