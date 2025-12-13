@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { useState, useContext } from "react";
 //import { CartContext } from "../context/CartContext";//
-import { CartContext } from "../context/cartcontext";
+import { CartContext } from "../context/CartContext";
+
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);

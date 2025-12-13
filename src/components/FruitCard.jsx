@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
-//import { CartContext } from "../context/CartContext";//
-import { CartContext } from "../context/cartcontext";
+import { CartContext } from "../context/CartContext";
+
+
 export default function FruitCard({ id, name, price, image }) {
   const [added, setAdded] = useState(false);
   const { cart, addToCart } = useContext(CartContext);
