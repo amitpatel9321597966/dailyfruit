@@ -11,16 +11,12 @@ export default function Cart() {
   const [address, setAddress] = useState("");
   const [mobile, setMobile] = useState("");
 
-  // Total amount calculation
   let totalPrice = cart.reduce(
     (total, item) => total + item.price * item.qty,
     0
   );
 
-  // Apply coupon
-  if (couponApplied) {
-    totalPrice = totalPrice * 0.9;
-  }
+  if (couponApplied) totalPrice *= 0.9;
 
   const handleApplyCoupon = () => {
     if (couponCode.trim().toLowerCase() === "daily10") {
@@ -37,27 +33,26 @@ export default function Cart() {
       return;
     }
 
-    // ✅ 10 digit mobile validation
     if (!/^\d{10}$/.test(mobile)) {
       alert("Please enter a valid 10 digit mobile number");
       return;
     }
 
-    const orderText =
-      `🛒 *New Order From DailyFruit*%0A%0A` +
+    // ✅ Server.js style WhatsApp message
+    const message =
+      "🆕 NEW ORDER FROM DAILYFRUIT 🍎🥭\n\n" +
+      "📦 Fruit Details:\n" +
       cart
-        .map(
-          (item) =>
-            `• ${item.name} - ${item.qty}kg = ₹${item.price * item.qty}`
-        )
-        .join("%0A") +
-      `%0A%0A🏠 *Address:* ${address}` +
-      `%0A📞 *Mobile:* ${mobile}` +
-      `%0A💰 *Total Amount:* ₹${totalPrice.toFixed(2)}` +
-      `%0A%0AThank you for shopping!`;
+        .map((item) => `${item.name} x ${item.qty} = ₹${item.price * item.qty}`)
+        .join("\n") +
+      "\n\n📍 Address: " + address +
+      "\n📞 Mobile: " + mobile +
+      "\n💰 Total Amount: ₹" + totalPrice.toFixed(2) +
+      "\n\n🙏 Thank you for shopping with Daily Fruit!" +
+      "\n\n⚠️ Fruit seller will contact you in a few minutes. If not, please call us after 5 minutes.";
 
-    const whatsappNumber = "919321597966"; // seller WhatsApp number
-    const url = `https://wa.me/${whatsappNumber}?text=${orderText}`;
+    const whatsappNumber = "919321597966";
+    const url = `https://wa.me/${whatsappNumber}?text=` + encodeURIComponent(message);
 
     window.open(url, "_blank");
   };
@@ -83,11 +78,7 @@ export default function Cart() {
             >
               <div className="flex-1">
                 <h2 className="text-xl font-semibold">{item.name}</h2>
-                <p className="text-gray-600">
-                  Price: ₹{item.price}/kg
-                </p>
-
-                {/* Quantity buttons */}
+                <p className="text-gray-600">Price: ₹{item.price}/kg</p>
                 <div className="flex items-center gap-3 mt-2">
                   <button
                     onClick={() => decreaseQty(item.id)}
@@ -95,22 +86,17 @@ export default function Cart() {
                   >
                     –
                   </button>
-                  <span className="text-lg font-semibold">
-                    {item.qty}
-                  </span>
+                  <span className="text-lg font-semibold">{item.qty}</span>
                   <button
                     onClick={() => increaseQty(item.id)}
                     className={`px-3 py-1 rounded ${
-                      item.qty === 10
-                        ? "bg-gray-400"
-                        : "bg-gray-300"
+                      item.qty === 10 ? "bg-gray-400" : "bg-gray-300"
                     }`}
                     disabled={item.qty === 10}
                   >
                     +
                   </button>
                 </div>
-
                 <p className="mt-2 font-semibold">
                   Total: ₹{item.price * item.qty}
                 </p>
@@ -125,7 +111,6 @@ export default function Cart() {
             </div>
           ))}
 
-          {/* Coupon */}
           <div className="flex flex-col sm:flex-row items-center gap-3 mt-4">
             <input
               type="text"
@@ -142,7 +127,6 @@ export default function Cart() {
             </button>
           </div>
 
-          {/* Total */}
           <div className="text-right mt-6">
             <h2 className="text-2xl font-bold mb-4">
               SubTotal: ₹{totalPrice.toFixed(2)}
@@ -155,13 +139,10 @@ export default function Cart() {
             </button>
           </div>
 
-          {/* Order Modal */}
           {showOrderForm && (
             <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
               <div className="bg-white p-6 rounded-lg w-full max-w-md">
-                <h2 className="text-2xl font-bold mb-4">
-                  Enter Details
-                </h2>
+                <h2 className="text-2xl font-bold mb-4">Enter Details</h2>
 
                 <input
                   type="text"
@@ -171,7 +152,6 @@ export default function Cart() {
                   className="w-full px-4 py-2 border border-gray-300 rounded mb-3"
                 />
 
-                {/* ✅ Mobile Number Input */}
                 <input
                   type="tel"
                   placeholder="10 digit mobile number"
@@ -179,13 +159,10 @@ export default function Cart() {
                   maxLength={10}
                   onChange={(e) => {
                     const value = e.target.value.replace(/\D/g, "");
-                    if (value.length <= 10) {
-                      setMobile(value);
-                    }
+                    if (value.length <= 10) setMobile(value);
                   }}
                   className="w-full px-4 py-2 border border-gray-300 rounded mb-1"
                 />
-
                 <p className="text-sm text-gray-500 mb-3">
                   Mobile number must be exactly 10 digits
                 </p>
@@ -212,4 +189,3 @@ export default function Cart() {
     </div>
   );
 }
-
