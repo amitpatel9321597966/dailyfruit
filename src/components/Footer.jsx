@@ -8,6 +8,19 @@ export default function Footer() {
             DailyFruit is inspired by a family-owned local fruit shop, bringing fresh fruits to customers through simple and reliable technology.
           </p>
         </div>
+            <div className="bg-red-800 text-white py-4 text-center">
+      <p className="font-semibold">
+        <a
+          href="https://wa.me/9321597966"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline"
+        >
+          📞 Contact Via WhatsApp
+        </a>
+      </p>
+      <p className="text-sm mt-1">© 2025 DailyFruit</p>
+    </div>
       </footer>
 
       {/* Fixed Bottom Line with professional background */}
