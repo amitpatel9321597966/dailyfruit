@@ -36,7 +36,6 @@ export default function Cart() {
       return;
     }
 
-    // Backend url (Render) wala
     const backendURL = "https://dailyfruit-backend-1.onrender.com/send-order";
 
     try {
