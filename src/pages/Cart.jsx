@@ -15,6 +15,7 @@ export default function Cart() {
     (total, item) => total + item.price * item.qty,
     0
   );
+
   if (couponApplied) totalPrice *= 0.9;
 
   const handleApplyCoupon = () => {
@@ -26,40 +27,43 @@ export default function Cart() {
     }
   };
 
-  const handlePlaceOrder = async () => {
+  const handlePlaceOrder = () => {
     if (!address) {
       alert("Please enter address");
       return;
     }
+
     if (!/^\d{10}$/.test(mobile)) {
       alert("Please enter a valid 10 digit mobile number");
       return;
     }
 
-    const backendURL = "https://dailyfruit-backend-1.onrender.com/send-order";
+    //order  list 
+    const orderList = cart
+      .map(
+        (item, index) =>
+          `${index + 1}. ${item.name} x ${item.qty} = ₹${item.price * item.qty}`
+      )
+      .join("\n");
 
-    try {
-      const res = await fetch(backendURL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          address,
-          mobile,
-          items: cart,
-          total: totalPrice.toFixed(2),
-        }),
-      });
-      const data = await res.json();
+    const message =
+      "🆕 NEW ORDER FROM DAILYFRUIT 🍎🥭\n\n" +
+      "🧺 Order List:\n" +
+      orderList +
+      "\n\n📍 Address: " + address +
+      "\n📞 Mobile: " + mobile +
+      "\n💰 Total Amount: ₹" + totalPrice.toFixed(2) +
+      "\n\n🙏 Thank you for shopping with Daily Fruit!" +
+      "\n⚠️ Fruit seller will contact you shortly.";
 
-      if (data.success && data.whatsappUrl) {
-        window.open(data.whatsappUrl, "_blank");
-      } else {
-        alert("Something went wrong. Please try again.");
-      }
-    } catch (err) {
-      console.error(err);
-      alert("Error sending order. Check console.");
-    }
+    const whatsappNumber = "919321597966"; // number 
+    const whatsappUrl =
+      "https://wa.me/" +
+      whatsappNumber +
+      "?text=" +
+      encodeURIComponent(message);
+
+    window.open(whatsappUrl, "_blank");
   };
 
   return (
@@ -67,7 +71,9 @@ export default function Cart() {
       <h1 className="text-3xl font-bold mb-6">Your Cart 🛒</h1>
 
       <div className="flex items-center bg-green-100 text-green-800 px-4 py-2 rounded-lg shadow-md w-max mx-auto mt-6">
-        <span className="font-semibold">Order between Bandra to Borivali</span>
+        <span className="font-semibold">
+          Order between Bandra to Borivali
+        </span>
       </div>
 
       {cart.length === 0 ? (
@@ -82,6 +88,7 @@ export default function Cart() {
               <div className="flex-1">
                 <h2 className="text-xl font-semibold">{item.name}</h2>
                 <p className="text-gray-600">Price: ₹{item.price}/kg</p>
+
                 <div className="flex items-center gap-3 mt-2">
                   <button
                     onClick={() => decreaseQty(item.id)}
@@ -89,7 +96,9 @@ export default function Cart() {
                   >
                     –
                   </button>
+
                   <span className="text-lg font-semibold">{item.qty}</span>
+
                   <button
                     onClick={() => increaseQty(item.id)}
                     className={`px-3 py-1 rounded ${
@@ -100,7 +109,10 @@ export default function Cart() {
                     +
                   </button>
                 </div>
-                <p className="mt-2 font-semibold">Total: ₹{item.price * item.qty}</p>
+
+                <p className="mt-2 font-semibold">
+                  Total: ₹{item.price * item.qty}
+                </p>
               </div>
 
               <button
@@ -129,7 +141,9 @@ export default function Cart() {
           </div>
 
           <div className="text-right mt-6">
-            <h2 className="text-2xl font-bold mb-4">SubTotal: ₹{totalPrice.toFixed(2)}</h2>
+            <h2 className="text-2xl font-bold mb-4">
+              SubTotal: ₹{totalPrice.toFixed(2)}
+            </h2>
             <button
               onClick={() => setShowOrderForm(true)}
               className="bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700"
@@ -162,12 +176,15 @@ export default function Cart() {
                   }}
                   className="w-full px-4 py-2 border border-gray-300 rounded mb-1"
                 />
-                <p className="text-sm text-gray-500 mb-3">Mobile number must be exactly 10 digits</p>
+
+                <p className="text-sm text-gray-500 mb-3">
+                  Mobile number must be exactly 10 digits
+                </p>
 
                 <div className="flex justify-end gap-3">
                   <button
                     onClick={() => setShowOrderForm(false)}
-                    className="px-4 py-2 rounded border"
+                    className="px-4 py-2 rounded border "
                   >
                     Cancel
                   </button>
