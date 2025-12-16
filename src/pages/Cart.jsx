@@ -54,7 +54,7 @@ export default function Cart() {
       "\n📞 Mobile: " + mobile +
       "\n💰 Total Amount: ₹" + totalPrice.toFixed(2) +
       "\n\n🙏 Thank you for shopping with Daily Fruit!" +
-      "\n⚠️ Fruit seller will contact you shortly.";
+      "\n⚠️ Fruit seller will contact you in a few minutes for CONFIRMING Order.If not , please call us after 5 minutes.";
 
     const whatsappNumber = "919321597966"; // number 
     const whatsappUrl =
