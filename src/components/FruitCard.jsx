@@ -15,7 +15,7 @@ export default function FruitCard({ id, name, price, image }) {
   const cartCount = cart.find((item) => item.id === id)?.qty || 0;
 
   return (
-    <div className="bg-white rounded-xl shadow-md p-4 border-2 border-lime-200 hover:border-lime-400 transition flex flex-col relative">
+    <div className="bg-white rounded-xl shadow-md p-4 border-2 border-black hover:border-red-600 transition flex flex-col relative">
       <img
         src={image}
         alt={name}

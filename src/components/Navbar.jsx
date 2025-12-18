@@ -29,13 +29,13 @@ export default function Navbar() {
 
         {/* desktop menu*/}
         <div className="hidden md:flex items-center gap-8 text-lg font-medium">
-          <Link to="/" className="hover:text-green-300">All Fruits</Link>
-          <Link to="/Seasonal" className="hover:text-green-300">Seasonal</Link>
+          <Link to="/" className="hover:text-green-300 text-black">All Fruits</Link>
+          <Link to="/Seasonal" className="hover:text-green-300 text-black">Seasonal</Link>
 
           {/* foe destop cart with count */}
           <Link
             to="/cart"
-            className="relative bg-green-600 px-4 py-2 rounded-full hover:bg-green-700 transition"
+            className="text-white relative bg-green-600 px-4 py-2 rounded-full hover:bg-green-700 transition"
           >
             🛒 Cart
             {totalItems > 0 && (
