@@ -1,20 +1,28 @@
-<<<<<<< HEAD
-# dailyfruit
-=======
-# React + Vite
+# 🍊 DailyFruit – Online Fruit Ordering Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack MERN web application inspired by my father’s fruit shop. Users can browse fruits, manage a cart, and place orders quickly via WhatsApp. Frontend is deployed on Vercel for fast access.
 
-Currently, two official plugins are available:
+## 🚀 Features
+- Browse fruits with price & image  
+- Add items to cart  
+- Increase / decrease quantity  
+- Remove items from cart  
+- Auto-calculate total price
+- add coupan system for 10% discount  
+- Place order via **WhatsApp directly from frontend** (fast and responsive)  
+- Fully responsive for desktop buttons separated and for  mobile buttons are in menu button 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# 🛠️ Tech Stack
+- Frontend: React, Context API  
+- Backend: Node.js, Express  
+- Hosting: Vercel (Frontend)  
 
-## React Compiler
+# 🌐 Live Demo
+- Website: [https://dailyfruit.vercel.app](https://dailyfruit.vercel.app)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+# About Me
+**Amit Patel** — 3rd-year Computer Science student  
+Focused on MERN stack development, building real-world solutions.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
->>>>>>> 8be3358 (Initial commit)
+# 🎯 Why This Project?
+Not just an academic project — solves a **real business problem** for my **father’s fruit) shop**. Orders can be placed faster via WhatsApp integration, deployed live for practical use.  
